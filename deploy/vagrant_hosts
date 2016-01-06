@@ -28,6 +28,7 @@ elk ansible_ssh_host=10.0.1.16 es_http_enabled=True
 
 [app_server]
 app ansible_ssh_host=10.0.1.17
+chatops_server ansible_ssh_host=10.0.1.51
 
 ; Research Component
 
@@ -64,6 +65,9 @@ research_python
 research_matlab
 research_spss
 research_sas
+
+[chatops]
+chatops_server ansible_ssh_host=10.0.1.51
 
 ; Global Groups
 

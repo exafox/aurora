@@ -52,7 +52,7 @@ Vagrant.configure(2) do |config|
     fs_config.vm.provider 'virtualbox' do |v|
       unless File.exist?(disk_file_2)
         v.customize ['createhd', '--filename', disk_file_2, '--size', 2048, '--variant', 'fixed']
-        v.customize ['storagectl', :id, '--name', 'SATA Controller', '--add', 'sata', '--portcount', 1]
+        #v.customize ['storagectl', :id, '--name', 'SATA Controller', '--add', 'sata', '--portcount', 1]
         v.customize ['storageattach', :id, '--storagectl', 'SATA Controller', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', disk_file_2]
       end
     end
@@ -353,4 +353,35 @@ Vagrant.configure(2) do |config|
 
     server.vm.network :private_network, ip: "10.0.1.25"
   end
+
+  ############################
+  ### App Server Instances ###
+  ############################
+
+  # Chatops server
+
+  config.vm.define :chatops_server do |chatops_config|
+    chatops_config.vm.box = "bento/centos-6.7"
+    chatops_config.vm.host_name = "chatops.test.dev"
+
+    chatops_config.ssh.forward_agent = true
+
+    chatops_config.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    chatops_config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "deploy_app_server.yml"
+      ansible.inventory_path = "vagrant_hosts"
+    end
+    chatops_config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "deploy_chatops_server.yml"
+      ansible.inventory_path = "vagrant_hosts"
+    end
+
+    chatops_config.vm.network :private_network, ip: "10.0.1.51"
+  end
+
+
 end

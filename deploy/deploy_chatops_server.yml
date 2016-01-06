@@ -1,0 +1,14 @@
+
+---
+- hosts: chatops
+  sudo: no
+  tasks:
+    - name: Get Mattermost
+      get_url:
+        url: https://github.com/mattermost/platform/releases/download/v1.3.0/mattermost.tar.gz
+        dest: ~/
+    - name: Extract Mattermost
+      unarchive:
+        src: ~/mattermost.tar.gz
+        dest: ~/
+        copy: no
