@@ -114,6 +114,21 @@
 #       command: "/sbin/service iptables save"
 #       when: iptables_config
 
+
+- hosts: chatops
+  sudo: no
+  tasks:
+    - name: create virtualenv
+      shell: virtualenv ~/py --no-site-packages
+        creates=py
+      environment:
+        PATH: /usr/local/bin/:{{ ansible_env.PATH }}
+    - name: Pip install supervisord
+      pip:
+        name: supervisord
+        virtualenv=~/py
+
+
 - hosts: chatops
   sudo: no
   tasks:
