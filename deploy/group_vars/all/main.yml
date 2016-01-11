@@ -195,7 +195,6 @@ es_service_account_password: password
 es_message_auth: True
 es_user: elasticsearch
 
-
 #============================#
 ###  MATTERMOST SETTINGS   ###
 #============================#
@@ -207,3 +206,26 @@ mattermost_encrypt_key: opensesame11111111111111111111111111111111
 mattermost_publiclinksalt: table1111111111111111111111111111111111111
 mattermost_invitesalt: sea111111111111111111111111111111111111111
 mattermost_passwordresetsalt: kosher111111111111111111111111111111111111
+
+#===================#
+### GOCD Settings ###
+#===================#
+
+# Variables used for running the test suite
+gocd_service_username: admin
+gocd_service_password: password
+
+#=========================#
+### PostgreSQL Settings ###
+#=========================#
+
+# Superuser
+pp_superaccount: postgres
+pp_superpassword: password
+
+# PPAS Port
+pp_serverport: 5432
+
+# DBA service account
+pp_dba_username: vagrant
+pp_dba_password: vagrant

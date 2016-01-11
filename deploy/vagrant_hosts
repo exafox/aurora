@@ -69,8 +69,33 @@ research_sas
 [chatops]
 chatops_server ansible_ssh_host=10.0.1.51
 
-; Global Groups
+; Pipeline Component
+[ci_server]
+ci_server ansible_ssh_host=10.0.1.26
 
+[ci_agent]
+ci_agent_1 ansible_ssh_host=10.0.1.27
+
+[ci_terminal]
+ci_terminal_1 ansible_ssh_host=10.0.1.28
+
+[pipeline:children]
+ci_server
+ci_agent
+ci_terminal
+
+; Data Warehouse Component
+[db_server]
+db_server ansible_ssh_host=10.0.1.29
+
+[db_terminal]
+db_terminal ansible_ssh_host=10.0.1.30
+
+[datawarehouse]
+db_server
+db_terminal
+
+; Global Groups
 [all_groups:children]
 admin_terminal
 proxy_server
@@ -80,6 +105,8 @@ elasticsearch
 elk
 app_server
 research_environment
+pipeline
+datawarehouse
 
 [terminals:vars]
 is_terminal=True
@@ -87,3 +114,4 @@ is_terminal=True
 [terminals:children]
 admin_terminal
 analytics_terminal
+db_terminal
