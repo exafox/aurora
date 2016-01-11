@@ -198,10 +198,11 @@ es_user: elasticsearch
 #============================#
 ###  MATTERMOST SETTINGS   ###
 #============================#
-mattermost_muser: mattermost_db_user
-mattermostuser_password: password
-mattermost_db_host: postgres.dev.test
-mattermost_db_name: mattermost
+mattermost_muser: vagrant
+mattermostuser_password: vagrant
+mattermost_db_host: 10.0.1.29
+mattermost_ssl_mode: disable
+mattermost_db_name: vagrant
 mattermost_encrypt_key: opensesame11111111111111111111111111111111
 mattermost_publiclinksalt: table1111111111111111111111111111111111111
 mattermost_invitesalt: sea111111111111111111111111111111111111111
