@@ -67,6 +67,8 @@ Vagrant.configure(2) do |config|
 
     fs_config.vm.provision 'ansible' do |ansible|
       ansible.playbook = "configure_file_shares.yml"
+
+      ansible.inventory_path = "vagrant_hosts"
     end
 
     fs_config.vm.network :private_network, ip: "10.0.1.5"
@@ -371,10 +373,11 @@ Vagrant.configure(2) do |config|
       v.cpus = 1
     end
 
-    chatops_config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "deploy_app_server.yml"
-      ansible.inventory_path = "vagrant_hosts"
-    end
+    # chatops_config.vm.provision "ansible" do |ansible|
+    #   ansible.playbook = "deploy_app_server.yml"
+    #   ansible.inventory_path = "vagrant_hosts"
+    # end
+
     chatops_config.vm.provision "ansible" do |ansible|
       ansible.playbook = "deploy_chatops_server.yml"
       ansible.inventory_path = "vagrant_hosts"

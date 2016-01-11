@@ -3,6 +3,12 @@
 # used by Vagrant, and so should not be used for a real deployment
 # without extensive modification.
 ---
+- hosts: file_server_1
+  sudo: yes
+  tasks:
+    - name: Probe for other file server
+      command: "gluster peer probe 10.0.1.5"
+
 - hosts: file_server_2
   sudo: yes
 

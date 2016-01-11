@@ -194,3 +194,16 @@ es_service_account: admin
 es_service_account_password: password
 es_message_auth: True
 es_user: elasticsearch
+
+
+#============================#
+###  MATTERMOST SETTINGS   ###
+#============================#
+mattermost_muser: mattermost_db_user
+mattermostuser_password: password
+mattermost_db_host: postgres.dev.test
+mattermost_db_name: mattermost
+mattermost_encrypt_key: opensesame11111111111111111111111111111111
+mattermost_publiclinksalt: table1111111111111111111111111111111111111
+mattermost_invitesalt: sea111111111111111111111111111111111111111
+mattermost_passwordresetsalt: kosher111111111111111111111111111111111111
