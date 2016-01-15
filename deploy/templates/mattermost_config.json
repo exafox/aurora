@@ -23,7 +23,7 @@
     },
     "SqlSettings": {
         "DriverName": "postgres",
-        "DataSource": "postgres://{{ mattermost_muser }}:{{ mattermostuser_password }}@{{ mattermost_db_host }}:5432/{{ mattermost_db_name }}?sslmode={{ mattermost_ssl_mode }}&connect_timeout=10",
+        "DataSource": "postgres://{{ mattermost_db_user }}:{{ mattermostuser_password }}@{{ mattermost_db_host }}:5432/{{ mattermost_db_name }}?sslmode={{ mattermost_ssl_mode }}&connect_timeout=10",
         "DataSourceReplicas": [],
         "MaxIdleConns": 10,
         "MaxOpenConns": 10,
@@ -34,9 +34,9 @@
         "EnableConsole": true,
         "ConsoleLevel": "DEBUG",
         "EnableFile": true,
-        "FileLevel": "INFO",
+        "FileLevel": "DEBUG",
         "FileFormat": "",
-        "FileLocation": ""
+        "FileLocation": "~/log"
     },
     "FileSettings": {
         "DriverName": "local",

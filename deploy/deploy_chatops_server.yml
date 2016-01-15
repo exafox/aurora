@@ -118,20 +118,6 @@
 - hosts: chatops
   sudo: no
   tasks:
-    - name: create virtualenv
-      shell: virtualenv ~/py --no-site-packages
-        creates=py
-      environment:
-        PATH: /usr/local/bin/:{{ ansible_env.PATH }}
-    - name: Pip install supervisord
-      pip:
-        name: supervisord
-        virtualenv=~/py
-
-
-- hosts: chatops
-  sudo: no
-  tasks:
     - name: Get Mattermost
       get_url:
         url: https://github.com/mattermost/platform/releases/download/v1.3.0/mattermost.tar.gz
@@ -141,7 +127,7 @@
         src: ~/mattermost.tar.gz
         dest: ~/
         copy: no
-    - name: Creates directory
+    - name: Creates mattermost directory
       file:
         path: mattermost/data
         state: directory
@@ -150,3 +136,36 @@
         src: templates/mattermost_config.json
         dest: mattermost/config/config.json
         mode: 0640
+
+
+- hosts: chatops
+  sudo: no
+  vars:
+    supervisord_bin_path: ~/mattermost/bin/platform
+  tasks:
+    - name: create virtualenv
+      shell: virtualenv ~/py --no-site-packages
+      # creates: py
+      environment:
+        PATH: /usr/local/bin/:{{ ansible_env.PATH }}
+    - name: Pip install supervisord
+      pip:
+        name: supervisor
+        virtualenv: ~/py
+    - name: Install mattermost supervisord.conf
+      template:
+        src: templates/supervisord.conf
+        dest: mattermost/supervisord.conf
+        mode: 0640
+    - name: Creates log directory
+      file:
+        path: ~/log
+        state: directory
+
+- hosts: chatops
+  sudo: yes
+  tasks:  
+    - name: Open port range for app prototyping
+      command: "iptables -I {{ iptables_chain }} 3 -m state --state NEW -p tcp --dport 30000:31000 -j ACCEPT"
+      # when: iptables_config
+      # with_items: groups['proxy_server']

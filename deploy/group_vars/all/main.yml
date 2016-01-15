@@ -31,6 +31,8 @@ home_directory: "/testorg"
 
 # Adds a customizeable masthead to all configuration files deployed by Ansible.
 template_masthead: |
+
+deploy_user: vagrant
   #=======================================================
   # Test Organization
   #-------------------------------------------------------
@@ -198,7 +200,7 @@ es_user: elasticsearch
 #============================#
 ###  MATTERMOST SETTINGS   ###
 #============================#
-mattermost_muser: vagrant
+mattermost_db_user: vagrant
 mattermostuser_password: vagrant
 mattermost_db_host: 10.0.1.29
 mattermost_ssl_mode: disable
@@ -230,3 +232,8 @@ pp_serverport: 5432
 # DBA service account
 pp_dba_username: vagrant
 pp_dba_password: vagrant
+
+
+# Supervisor settings
+supervisord_bin_path: ~/mattermost/bin/
+supervisord_bin: platform
